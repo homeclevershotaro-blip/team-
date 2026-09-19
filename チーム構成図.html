@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>ホームクレバー チーム構成図</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Yu Gothic", "游ゴシック", Meiryo, sans-serif;
+    background: #f0f2f5;
+    padding: 20px;
+    font-size: 11px;
+  }
+
+  /* ヘッダー */
+  .header {
+    background: linear-gradient(135deg, #1a3a5c, #2a5a8c);
+    color: #fff;
+    padding: 16px 24px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header h1 { font-size: 18px; letter-spacing: 0.1em; }
+  .header .sub { font-size: 11px; opacity: 0.8; margin-top: 4px; }
+  .header .date { font-size: 11px; opacity: 0.7; }
+
+  /* グループ */
+  .group {
+    margin-bottom: 16px;
+  }
+  .group-label {
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+    color: #666;
+    margin-bottom: 8px;
+    padding-left: 4px;
+    border-left: 3px solid #aaa;
+    padding-left: 8px;
+  }
+  .group-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  /* カード */
+  .card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    flex: 1;
+    min-width: 200px;
+    max-width: 320px;
+  }
+  .card-header {
+    padding: 10px 14px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-num {
+    font-size: 10px;
+    opacity: 0.8;
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    padding: 1px 6px;
+    white-space: nowrap;
+  }
+  .card-title {
+    font-size: 13px;
+    font-weight: bold;
+  }
+  .card-body {
+    padding: 10px 14px;
+  }
+
+  /* アイテムリスト */
+  .item-section {
+    margin-bottom: 8px;
+  }
+  .item-section-label {
+    font-size: 9px;
+    font-weight: bold;
+    color: #888;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+    padding: 2px 0;
+    font-size: 10.5px;
+    color: #333;
+    line-height: 1.4;
+  }
+  .item-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 9px;
+    padding: 1px 5px;
+    border-radius: 3px;
+    margin-left: 4px;
+    white-space: nowrap;
+  }
+  .badge-now { background: #fff3cd; color: #856404; }
+  .badge-jul { background: #d1ecf1; color: #0c5460; }
+  .badge-key { background: #d4edda; color: #155724; }
+
+  /* カラー定義 */
+  .c-navy    { background: #1a3a5c; }
+  .c-gold    { background: #8b6914; }
+  .c-green   { background: #2e6b3e; }
+  .c-teal    { background: #1a6b6b; }
+  .c-blue    { background: #1a4a8c; }
+  .c-brown   { background: #7a3a1a; }
+  .c-purple  { background: #5a1a7a; }
+  .c-gray    { background: #3a4a5a; }
+  .c-olive   { background: #4a5a1a; }
+  .c-red     { background: #7a1a2a; }
+  .c-dark    { background: #1a1a3a; }
+
+  .dot-navy   { background: #1a3a5c; }
+  .dot-gold   { background: #8b6914; }
+  .dot-green  { background: #2e6b3e; }
+  .dot-teal   { background: #1a6b6b; }
+  .dot-blue   { background: #1a4a8c; }
+  .dot-brown  { background: #7a3a1a; }
+  .dot-purple { background: #5a1a7a; }
+  .dot-gray   { background: #3a4a5a; }
+  .dot-olive  { background: #4a5a1a; }
+  .dot-red    { background: #7a1a2a; }
+  .dot-dark   { background: #1a1a3a; }
+
+  /* 使い方説明 */
+  .howto {
+    background: #fff;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    border-left: 4px solid #1a3a5c;
+    font-size: 11px;
+    color: #333;
+    line-height: 1.7;
+  }
+  .howto strong { color: #1a3a5c; }
+
+  @media print {
+    body { background: #fff; padding: 5mm; }
+    .card { box-shadow: none; border: 0.3mm solid #ccc; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>🏢 株式会社ホームクレバー　Claude チーム構成図</h1>
+    <div class="sub">11カテゴリ専門チーム体制　／　各フォルダを開くとその担当Claudeが起動します</div>
+  </div>
+  <div class="date">2026年5月版</div>
+</div>
+
+<div class="howto">
+  <strong>使い方：</strong>
+  各カテゴリのフォルダ（例：<code>HomeCleaver_Team\01_経営企画\</code>）をClaude Codeで開くと、そのカテゴリ専門のClaudeとして動作します。<br>
+  フォルダ内の <code>CLAUDE.md</code> が「そのClaudeの役割・知識・行動原則」を定義しています。カテゴリごとに充実させていきます。
+</div>
+
+<!-- グループ1: 経営層 -->
+<div class="group">
+  <div class="group-label">経営層　―　代表直轄</div>
+  <div class="group-row">
+
+    <div class="card">
+      <div class="card-header c-navy">
+        <span class="card-num">01</span>
+        <span class="card-title">経営企画</span>
+      </div>
+      <div class="card-body">
+        <div class="item-section">
+          <div class="item-section-label">役割</div>
+          <div class="item"><span class="item-dot dot-navy"></span>5ヵ年計画（2026〜2030）管理</div>
+          <div class="item"><span class="item-dot dot-navy"></span>KPI月次チェック・軌道修正</div>
+          <div class="item"><span class="item-dot dot-navy"></span>銀行・金融機関交渉資料</div>
+          <div class="item"><span class="item-dot dot-navy"></span>玉子屋ブランド戦略</div>
+          <div class="item"><span class="item-dot dot-navy"></span>フェーズ移行判断サポート</div>
+        </div>
+        <div class="item-section">
+          <div class="item-section-label">保有情報</div>
+          <div class="item"><span class="item-dot dot-navy"></span>年商目標：2030年10億円</div>
+          <div class="item"><span class="item-dot dot-navy"></span>3本柱：管理受託・高単価・自社資産</div>
+          <div class="item"><span class="item-dot dot-navy"></span>年次収益シミュレーション</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header c-dark">
+        <span class="card-num">11</span>
+        <span class="card-title">VIP・超大型案件</span>
+      </div>
+      <div class="card-body">
+        <div class="item-section">
+          <div class="item-section-label">進行中案件</div>
+          <div class="item"><span class="item-dot dot-dark"></span>六本木165億（孫会長・James Sun）<span class="badge badge-now">進行中</span></div>
+          <div class="item"><span class="item-dot dot-dark"></span>津田沼南口（野村・三菱地所・SMBC）<span class="badge badge-now">進行中</span></div>
+        </div>
+        <div class="item-section">
+          <div class="item-section-label">役割</div>
+          <div class="item"><span class="item-dot dot-dark"></span>VIP向け提案書・手紙作成</div>
+          <div class="item"><span class="item-dot dot-dark"></span>案件進捗・次アクション管理</div>
+          <div class="item"><span class="item-dot dot-dark"></span>関係先との連絡調整記録</div>
+          <div class="item"><span class="item-dot dot-dark"></span>リスク・シナリオ分析</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- グループ2: 財務・人事 -->
+<div class="group">
+  <div class="group-label">管理部門　―　財務・人事</div>
+  <div class="group-row">
+
+    <div class="card">
+      <div class="card-header c-gold">
+        <span class="card-num">02</span>
+        <span class="card-title">経理・財務</span>
+      </div>
+      <div class="card-body">
+        <div class="item-section">
+          <div class="item-section-label">役割</div>
+          <div class="item"><span class="item-dot dot-gold"></span>業者支払一覧作成（現金・振込・コンビニ）</div>
+          <div class="item"><span class="item-dot dot-gold"></span>賃料入金管理（月次・物件別）</div>
+          <div class="item"><span class="item-dot dot-gold"></span>月次収支レポート</div>
+          <div class="item"><span class="item-dot dot-gold"></span>資金繰り管理</div>
+          <div class="item"><span class="item-dot dot-gold"></span>税務申告準備・決算資料</div>
+          <div class="item"><span class="item-dot dot-gold"></span>AI OCR（請求書・領収書）</div>
+        </div>
+        <div class="item-section">
+          <div class="item-section-label">定例タスク</div>
+          <div class="item"><span class="item-dot dot-gold"></span>毎月25日：給料日・特別徴収納付</div>
+          <div class="item"><span class="item-dot dot-gold"></span>月末：業者支払一覧確定</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header c-teal">
+        <span class="card-num">03</span>
+        <span class="card-title">人事・労務</span>
+      </div>
+      <div class="card-body">
+        <div class="item-section">
+          <div class="item-section-label">役割</div>
+          <div class="item"><span class="item-dot dot-teal"></span>給与計算（将太郎・隼之介・川島）</div>
+          <div class="item"><span class="item-dot dot-teal"></span>社会保険手続き（入社・退社）</div>
+          <div class="item"><span class="item-dot dot-teal"></span>市県民税 特別徴収管理</div>
+          <div class="item"><span class="item-dot dot-teal"></span>退職者処理（社労士連携）</div>
+          <div class="item"><span class="item-dot dot-teal"></span>川島マニュアル管理</div>
+        </div>
+        <div class="item-section">
+          <div class="item-section-label">直近イベント</div>
+          <div class="item"><span class="item-dot dot-teal"></span>将太郎・隼之介入社 <span class="badge badge-jul">2026年7月</span></div>
+          <div class="item"><span class="item-dot dot-teal"></span>黒崎退職 <span class="badge badge-now">2026年6月</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- グループ3: 物件運営 -->
+<div class="group">
+  <div class="group-label">物件運営　―　管理・修繕</div>
+  <div class="group-row">
+
+    <div class="card">
+      <div class="card-header c-green">
+        <span class="card-num">04</span>
+        <span class="card-title">賃貸管理</span>
+      </div>
+      <div class="card-body">
+        <div class="item-section">
+          <div class="item-section-label">役割</div>
+          <div class="item"><span class="item-dot dot-green"></span>入居者クレーム・問い合わせ対応</div>
+          <div class="item"><span class="item-dot dot-green"></span>修繕手配・工事発注</div>
+          <div class="item"><span class="item-dot dot-green"></span>契約更新管理・書類作成</div>
+          <div class="item"><span class="item-dot dot-green"></span>退去精算（原状回復・敷金）</div>
+          <div class="item"><span class="item-dot dot-green"></span>月次管理レポート（オーナー向け）</div>
+          <div class="item"><span class="item-dot dot-green"></span>川島書類一式（34番・5フォルダ）</div>
+        </div>
+        <div class="item-section">
+          <div class="item-section-label">担当予定</div>
+          <div class="item"><span class="item-dot dot-green"></span>隼之介（管理担当）<span class="badge badge-jul">7月入社</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header c-brown">
+        <span class="card-num">06</span>
+        <span class="card-title">修繕・リフォーム・建築企画</span>
+      </div>
+      <div class="card-body">
+        <div class="item-section">
+          <div class="item-section-label">役割</div>
+          <div class="item"><span class="item-dot dot-brown"></span>修繕工事 見積・発注・進捗管理</div>
+          <div class="item"><span class="item-dot dot-brown"></span>リフォーム提案（空室改善）</div>
+          <div class="item"><span class="item-dot dot-brown"></span>緊急修繕 即日対応手配</div>
+          <div class="item"><span class="item-dot dot-brown"></span>建築企画（新規収益物件・増築）</div>
+          <div class="item"><span class="item-dot dot-brown"></span>修繕緊急度マップ作成</div>
+          <div class="item"><span class="item-dot dot-brown"></span>年間修繕計画</div>
+        </div>
+        <div class="item-section">
+          <div class="item-section-label">収益規模</div>
+          <div class="item"><span class="item-dot dot-brown"></span>年商4,000〜5,000万円 <span class="badge badge-key">最大収益源</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- グループ4: 営業 -->
+<div class="group">
+  <div class="group-label">営業部門　―　管理受託・収益物件</div>
+  <div class="group-row">
+
+    <div class="card">
+      <div class="card-header c-blue">
+        <span class="card-num">05</span>
+        <span class="card-title">賃貸営業</span>
+      </div>
+      <div class="card-body">
+        <div class="item-section">
+          <div class="item-section-label">役割</div>
+          <div class="item"><span class="item-dot dot-blue"></span>管理受託獲得（将太郎サポート）</div>
+          <div class="item"><span class="item-dot dot-blue"></span>訪問先リスト管理（黒崎58件）</div>
+          <div class="item"><span class="item-dot dot-blue"></span>営業トークスクリプト更新</div>
+          <div class="item"><span class="item-dot dot-blue"></span>管理受託提案書・診断シート</div>
+          <div class="item"><span class="item-dot dot-blue"></span>入居者募集・空室対策</div>
+          <div class="item"><span class="item-dot dot-blue"></span>週次振り返り・改善提案</div>
+        </div>
+        <div class="item-section">
+          <div class="item-section-label">料率（確定済み）</div>
+          <div class="item"><span class="item-dot dot-blue"></span>共同住宅5%・戸建6%・店舗8%・駐車場7%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header c-purple">
+        <span class="card-num">07</span>
+        <span class="card-title">収益物件営業</span>
+      </div>
+      <div class="card-body">
+        <div class="item-section">
+          <div class="item-section-label">役割</div>
+          <div class="item"><span class="item-dot dot-purple"></span>事業計画書作成（HTML・A4印刷）</div>
+          <div class="item"><span class="item-dot dot-purple"></span>融資シミュレーション</div>
+          <div class="item"><span class="item-dot dot-purple"></span>銀行事前審査サポート</div>
+          <div class="item"><span class="item-dot dot-purple"></span>相続税対策提案（士業連携）</div>
+          <div class="item"><span class="item-dot dot-purple"></span>土地活用提案</div>
+        </div>
+        <div class="item-section">
+          <div class="item-section-label">進行中案件</div>
+          <div class="item"><span class="item-dot dot-purple"></span>吉野様：総事業費2.86億 <span class="badge badge-now">審査中</span></div>
+          <div class="item"><span class="item-dot dot-purple"></span>三橋建夫様：津田沼5丁目 <span class="badge badge-now">審査中</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- グループ5: 顧客管理 -->
+<div class="group">
+  <div class="group-label">顧客管理　―　オーナー・入居者</div>
+  <div class="group-row">
+
+    <div class="card">
+      <div class="card-header c-olive">
+        <span class="card-num">09</span>
+        <span class="card-title">オーナー・地主管理</span>
+      </div>
+      <div class="card-body">
+        <div class="item-section">
+          <div class="item-section-label">役割</div>
+          <div class="item"><span class="item-dot dot-olive"></span>既存11棟オーナーとの関係管理</div>
+          <div class="item"><span class="item-dot dot-olive"></span>月次オーナーレポート作成</div>
+          <div class="item"><span class="item-dot dot-olive"></span>新規見込みリスト管理（58件）</div>
+          <div class="item"><span class="item-dot dot-olive"></span>管理受託契約書作成</div>
+          <div class="item"><span class="item-dot dot-olive"></span>訪問記録・次回アクション</div>
+        </div>
+        <div class="item-section">
+          <div class="item-section-label">管理物件（11棟）</div>
+          <div class="item"><span class="item-dot dot-olive"></span>棒やビル28室・コンフォート吉野15室 他</div>
+          <div class="item"><span class="item-dot dot-olive"></span>稼働率94%・月額賃料560万円</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header c-red">
+        <span class="card-num">10</span>
+        <span class="card-title">入居者・テナント管理</span>
+      </div>
+      <div class="card-body">
+        <div class="item-section">
+          <div class="item-section-label">役割</div>
+          <div class="item"><span class="item-dot dot-red"></span>契約更新通知・書類作成</div>
+          <div class="item"><span class="item-dot dot-red"></span>退去受付・敷金精算</div>
+          <div class="item"><span class="item-dot dot-red"></span>クレーム対応テンプレート</div>
+          <div class="item"><span class="item-dot dot-red"></span>LINE自動通知（2026年7月〜）</div>
+          <div class="item"><span class="item-dot dot-red"></span>店舗テナント持参賃料管理</div>
+        </div>
+        <div class="item-section">
+          <div class="item-section-label">店舗テナント</div>
+          <div class="item"><span class="item-dot dot-red"></span>居酒屋もり・ヘアースタジオコージー</div>
+          <div class="item"><span class="item-dot dot-red"></span>SAUNA TOKYO AKASAKA（大野ビル）</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- グループ6: IT -->
+<div class="group">
+  <div class="group-label">IT・システム　―　デジタル基盤</div>
+  <div class="group-row">
+
+    <div class="card" style="max-width: 100%;">
+      <div class="card-header c-gray">
+        <span class="card-num">08</span>
+        <span class="card-title">IT・システム開発</span>
+      </div>
+      <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+        <div class="item-section">
+          <div class="item-section-label">CRM開発（home-clever）</div>
+          <div class="item"><span class="item-dot dot-gray"></span>顧客管理（借主/買主/売主/オーナー/法人）</div>
+          <div class="item"><span class="item-dot dot-gray"></span>物件登録（賃貸/売買/管理/収益）</div>
+          <div class="item"><span class="item-dot dot-gray"></span>賃貸業務フロー（募集〜再募集）</div>
+          <div class="item"><span class="item-dot dot-gray"></span>売買仲介業務フロー</div>
+          <div class="item"><span class="item-dot dot-gray"></span>建築企画・収益物件フロー</div>
+        </div>
+        <div class="item-section">
+          <div class="item-section-label">自動化・AI</div>
+          <div class="item"><span class="item-dot dot-gray"></span>LINE/メール/SMS自動通知</div>
+          <div class="item"><span class="item-dot dot-gray"></span>AI OCR（請求書・領収書）</div>
+          <div class="item"><span class="item-dot dot-gray"></span>文書自動生成</div>
+          <div class="item"><span class="item-dot dot-gray"></span>AI秘書機能</div>
+          <div class="item"><span class="item-dot dot-gray"></span>pg_cron 定期実行</div>
+        </div>
+        <div class="item-section">
+          <div class="item-section-label">インフラ・DB</div>
+          <div class="item"><span class="item-dot dot-gray"></span>Supabase（PostgreSQL）</div>
+          <div class="item"><span class="item-dot dot-gray"></span>テナント・物件データ登録済み</div>
+          <div class="item"><span class="item-dot dot-gray"></span>Edge Functions</div>
+          <div class="item"><span class="item-dot dot-gray"></span>管理・経理フロー統合</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- フォルダ構成 -->
+<div style="background:#fff;border-radius:8px;padding:16px 20px;margin-top:8px;border-left:4px solid #3a4a5a;">
+  <div style="font-size:12px;font-weight:bold;color:#3a4a5a;margin-bottom:10px;">📁 フォルダ構成（HomeCleaver_Team\）</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 24px;font-size:10.5px;font-family:monospace;color:#444;">
+    <div>📁 01_経営企画\CLAUDE.md</div>
+    <div>📁 07_収益物件営業\CLAUDE.md</div>
+    <div>📁 02_経理財務\CLAUDE.md</div>
+    <div>📁 08_ITシステム\CLAUDE.md</div>
+    <div>📁 03_人事労務\CLAUDE.md</div>
+    <div>📁 09_オーナー地主管理\CLAUDE.md</div>
+    <div>📁 04_賃貸管理\CLAUDE.md</div>
+    <div>📁 10_入居者テナント管理\CLAUDE.md</div>
+    <div>📁 05_賃貸営業\CLAUDE.md</div>
+    <div>📁 11_VIP超大型案件\CLAUDE.md</div>
+    <div>📁 06_修繕リフォーム建築\CLAUDE.md</div>
+    <div style="color:#888;">← 各フォルダで開くと専門Claudeが起動</div>
+  </div>
+</div>
+
+</body>
+</html>
