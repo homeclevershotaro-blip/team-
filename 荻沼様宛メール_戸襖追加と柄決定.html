@@ -25,11 +25,15 @@ button{margin:8px 8px 0 0;padding:10px 18px;font-size:15px;border:1px solid #333
 　現在のお見積に入っておりませんでしたので、追加でご対応をお願いいたします。
 　つきましては、追加分を反映したお見積書の再提出をお願いいたします。
 
-■2 和室入口の戸襖の柄が決定しました
+■2 天袋の追加（見積に追加をお願いします）
+・手前の和室の天袋 4枚
+　こちらも追加分のお見積書の作成をお願いいたします。
+
+■3 和室入口の戸襖の柄が決定しました
 ・カタログ：光　新鳥の子　vol.5
 ・品番：№608
 
-■3 大工さんの現地調査の日程
+■4 大工さんの現地調査の日程
 ・大工さんが現地調査に入れる最短の日程が決まりましたら、ご連絡をお願いいたします。
 　工期を決めたいと考えております。
 
@@ -43,6 +47,21 @@ button{margin:8px 8px 0 0;padding:10px 18px;font-size:15px;border:1px solid #333
 都築将太郎
 TEL 047-453-0050</pre>
 <button onclick="cp('b',this)">本文をコピー</button>
+<h2>LINE用</h2>
+<pre id="l">荻沼さん
+お疲れ様です。ホームクレバーの都築です。
+本日はありがとうございました。
+
+【都築謙二様邸】決定事項です。
+
+①和室と奥和室の間の戸襖4枚が見積に入っていませんでした。追加で見積をお願いします。
+②手前の和室の天袋4枚も、追加で見積をお願いします。
+③和室入口の戸襖の柄が決まりました。
+　光　新鳥の子　vol.5　№608
+④大工さんが現地調査に入れる最短の日程が決まりましたら教えてください。工期を決めたいと考えています。
+
+よろしくお願いします。</pre>
+<button onclick="cp('l',this)">LINEをコピー</button>
 <script>
 function cp(id,btn){var t=document.getElementById(id).innerText;
 (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).catch(function(){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()});
