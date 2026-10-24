@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>荻沼様宛メール</title>
+<style>
+body{font-family:"游ゴシック","Yu Gothic",sans-serif;max-width:720px;margin:24px auto;padding:0 16px;color:#222;background:#fff}
+h2{font-size:16px;margin:20px 0 6px}
+pre{white-space:pre-wrap;word-break:break-all;font-family:inherit;font-size:15px;line-height:1.7;background:#f6f6f6;border:1px solid #ccc;border-radius:6px;padding:14px;margin:0}
+button{margin:8px 8px 0 0;padding:10px 18px;font-size:15px;border:1px solid #333;border-radius:6px;background:#fff;cursor:pointer}
+</style></head><body>
+<h2>件名</h2>
+<pre id="s">【都築謙二様邸】戸襖の追加と柄決定のご連絡</pre>
+<button onclick="cp('s',this)">件名をコピー</button>
+<h2>本文</h2>
+<pre id="b">インテリアエージェント船橋
+荻沼 宏美 様
+
+いつもお世話になっております。
+株式会社ホームクレバーの都築です。
+
+本日はお打ち合わせありがとうございました。
+都築謙二様邸（八千代市大和田950-8）につきまして、決定事項を下記のとおりご連絡いたします。
+
+■1 戸襖の追加（見積に追加をお願いします）
+・和室と奥和室の間の戸襖 4枚
+　現在のお見積に入っておりませんでしたので、追加でご対応をお願いいたします。
+　つきましては、追加分を反映したお見積書の再提出をお願いいたします。
+
+■2 和室入口の戸襖の柄が決定しました
+・カタログ：光　新鳥の子　vol.5
+・品番：№608
+
+ご確認のうえ、ご手配をお願いいたします。
+追加分の納期につきましても、わかり次第お知らせください。
+
+どうぞよろしくお願いいたします。
+
+――――――――――――
+株式会社ホームクレバー
+都築将太郎
+TEL 047-453-0050</pre>
+<button onclick="cp('b',this)">本文をコピー</button>
+<script>
+function cp(id,btn){var t=document.getElementById(id).innerText;
+(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).catch(function(){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()});
+var o=btn.textContent;btn.textContent='コピーしました';setTimeout(function(){btn.textContent=o},1500)}
+</script></body></html>
