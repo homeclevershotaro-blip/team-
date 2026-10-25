@@ -2,6 +2,7 @@
 """株式会社ホームクレバー 御見積書PDF生成 (川嶋淳子様邸の書式)
 
 使い方: python3 make_estimate.py 入力.json 出力.pdf
+  → 出力.pdf と同じ名前の .xlsx（Excel版）も作る。
 入力JSONの書式は assets/sample_kawashima.json を参照。
 """
 import json
@@ -241,4 +242,7 @@ if __name__ == "__main__":
     d = json.load(open(sys.argv[1], encoding="utf-8"))
     BLANK = bool(d.get("blank"))
     t = build(d, sys.argv[2])
-    print(f"OK: {sys.argv[2]}  合計(税込) ¥{t:,}")
+    from excel import build_xlsx
+    xlsx = os.path.splitext(sys.argv[2])[0] + ".xlsx"
+    build_xlsx(d, COMPANY, compute(d)[0], xlsx, blank=BLANK)
+    print(f"OK: {sys.argv[2]} / {xlsx}  合計(税込) ¥{t:,}")
