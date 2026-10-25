@@ -27,8 +27,11 @@ COLS = [L, 258, 300, 342, 412, R]   # 名称 | 数量 | 単位 | 金額 | 備考
 ROW = 17.5
 
 
+BLANK = False   # 雛形モード: 金額欄を空欄で出す
+
+
 def yen(n):
-    return f"{n:,}"
+    return "" if BLANK else f"{n:,}"
 
 
 def wrap(text, width, size):
@@ -51,7 +54,7 @@ def compute(data):
         for it in s["items"]:
             amt = it.get("amount")
             if amt is None:
-                amt = round(it["qty"] * it["unit_price"])
+                amt = 0 if BLANK else round(it["qty"] * it["unit_price"])
             items.append({**it, "amount": amt})
         sub = sum(i["amount"] for i in items)
         sections.append({"name": s["name"], "items": items, "subtotal": sub})
@@ -146,7 +149,7 @@ def build(data, out):
     p.rect(L + 1, y - 38, 62, 33, fill=GRAY, lw=0.6)
     p.text(L + 32, y - 25, "御見積金額", 8.5, bold=True, align="c")
     p.line(L + 66, y - 12, L + 66, y - 32, 1.4)
-    p.text(L + 76, y - 28, f"￥{yen(total)}－", 17, bold=True)
+    p.text(L + 76, y - 28, f"￥{yen(total)}" + ("" if BLANK else "－"), 17, bold=True)
     p.text(L + 260, y - 27, "（消費税込）", 7.5)
 
     # 工事情報
@@ -215,8 +218,8 @@ def build(data, out):
         return y - h
     y = total_row(y, "小計", yen(subtotal))
     y = total_row(y, f'消費税（{COMPANY["tax_rate_percent"]}%）', yen(tax))
-    if discount:
-        y = total_row(y, "端数値引き", f"－{yen(discount)}")
+    if discount or BLANK:
+        y = total_row(y, "端数値引き", "" if BLANK else f"－{yen(discount)}")
     y = total_row(y, "合計（税込）", yen(total), big=True, fill=GRAY)
 
     # 注記
@@ -236,5 +239,6 @@ if __name__ == "__main__":
     if len(sys.argv) != 3:
         sys.exit("usage: make_estimate.py input.json output.pdf")
     d = json.load(open(sys.argv[1], encoding="utf-8"))
+    BLANK = bool(d.get("blank"))
     t = build(d, sys.argv[2])
     print(f"OK: {sys.argv[2]}  合計(税込) ¥{t:,}")
