@@ -1,0 +1,26 @@
+{
+  "blank": true,
+  "date": "令和　　年　　月　　日",
+  "customer": "　　　　　　　　",
+  "project": "",
+  "place": "",
+  "period": "着工から約　週間（ご相談の上）",
+  "payment": "契約時・着工時・完了時の3回払い（各回の金額は契約書に記載）",
+  "sections": [
+    {"name": "", "items": [
+      {"name": "", "qty": "", "unit": ""}, {"name": "", "qty": "", "unit": ""},
+      {"name": "", "qty": "", "unit": ""}, {"name": "", "qty": "", "unit": ""}]},
+    {"name": "", "items": [
+      {"name": "", "qty": "", "unit": ""}, {"name": "", "qty": "", "unit": ""},
+      {"name": "", "qty": "", "unit": ""}, {"name": "", "qty": "", "unit": ""}]},
+    {"name": "共通費", "items": [
+      {"name": "養生費", "qty": 1, "unit": "式"},
+      {"name": "現場管理費", "qty": 1, "unit": "式"},
+      {"name": "一般管理費", "qty": 1, "unit": "式"},
+      {"name": "法定福利費", "qty": 1, "unit": "式"}]}
+  ],
+  "notes": [
+    "工事期間中の電気・水道はお客様宅のものを使用させていただきます。",
+    "上記以外の工事は別途となります。"
+  ]
+}
