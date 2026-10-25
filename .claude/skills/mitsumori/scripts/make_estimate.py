@@ -18,7 +18,21 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 COMPANY = json.load(open(os.path.join(HERE, "..", "assets", "company.json"), encoding="utf-8"))
 
 FONT = "IPAG"
-pdfmetrics.registerFont(TTFont(FONT, os.path.join(HERE, "..", "assets", "ipag.ttf")))
+# 同梱フォントがなければ (ファイルを1つずつ追加した場合など) システムの日本語フォントを探す
+_FONTS = [os.path.join(HERE, "..", "assets", "ipag.ttf"),
+          "/usr/share/fonts/opentype/ipafont-gothic/ipag.ttf",
+          "/usr/share/fonts/truetype/fonts-japanese-gothic.ttf",
+          "/usr/share/fonts/truetype/takao-gothic/TakaoGothic.ttf",
+          "C:/Windows/Fonts/msgothic.ttc",
+          "/System/Library/Fonts/ヒラギノ角ゴシック W3.ttc",
+          "/Library/Fonts/Arial Unicode.ttf"]
+_font = next((f for f in _FONTS if os.path.exists(f)), None)
+if _font:
+    pdfmetrics.registerFont(TTFont(FONT, _font))
+else:   # 最後の手段: reportlab 内蔵の日本語CIDフォント
+    from reportlab.pdfbase.cidfonts import UnicodeCIDFont
+    FONT = "HeiseiKakuGo-W5"
+    pdfmetrics.registerFont(UnicodeCIDFont(FONT))
 
 W, H = A4
 L, R = 42, 553          # 表の左右端
