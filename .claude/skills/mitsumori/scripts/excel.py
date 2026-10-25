@@ -48,12 +48,18 @@ def build_xlsx(data, company, sections, out, blank=False):
     ws.row_dimensions[1].height = 30
 
     ws.merge_cells("A3:C3")
-    put(ws, "A3", f'{data["customer"]} {data.get("honorific", "様")}', 12)
+    hon = data.get("honorific", "様")
+    if data.get("customer", "").strip():
+        put(ws, "A3", f'{data["customer"]} {hon}', 12)
+    else:
+        put(ws, "A3", hon, 12, align="right")
+    ws.row_dimensions[3].height = 22
     for c in ws["A3:C3"][0]:
         c.border = Border(bottom=THIN)
     put(ws, "F3", data["date"], 9, align="right")
     ws.merge_cells("A4:F4")
     put(ws, "A4", data.get("intro", company["default_intro"]))
+    ws.row_dimensions[4].height = 20
 
     # 工事情報 (左) と会社情報 (右)
     info = [("工事名称", data["project"]), ("工事場所", data["place"]), ("工期", data["period"]),
@@ -64,17 +70,21 @@ def build_xlsx(data, company, sections, out, blank=False):
         put(ws, f"A{r}", k, 9, True, fill=GRAY)
         put(ws, f"B{r}", v, 9, wrap=True)
         box(ws, f"A{r}:D{r}")
-        ws.row_dimensions[r].height = 30 if len(v) > 24 else 18
+        ws.row_dimensions[r].height = 26
     lines = [(company["name"], 11, True), (f'{company["rep_title"]}　{company["rep_name"]}', 9, False)]
     lines += [(t, 8, False) for t in company["address_lines"] + company["license_lines"]]
     lines += [(f'担当：{data.get("staff", company["default_staff"])}', 9, False)]
-    for i, (t, size, bold) in enumerate(lines):
-        r = 7 + i
-        ws.merge_cells(f"E{r}:F{r}")
-        put(ws, f"E{r}", t, size, bold)
+    ws.merge_cells("E7:F7")
+    put(ws, "E7", lines[0][0], 11, True)
+    ws.merge_cells("E8:F12")
+    put(ws, "E8", "\n".join(t for t, _, _ in lines[1:-1]), 8, wrap=True)
+    ws["E8"].alignment = Alignment(horizontal="left", vertical="top", wrap_text=True, indent=0)
+    ws.merge_cells("E13:F13")
+    put(ws, "E13", lines[-1][0], 9)
+    ws.row_dimensions[7].height = 22
 
     # 明細
-    r = 7 + len(lines) + 2
+    r = 15
     head = r
     ws.merge_cells(f"A{r}:B{r}")
     for col, label in zip("ACDEF", ["名称・内訳", "数量", "単位", "金額（税抜）", "備考"]):
@@ -91,13 +101,14 @@ def build_xlsx(data, company, sections, out, blank=False):
             r += 1
             ws.merge_cells(f"A{r}:B{r}")
             put(ws, f"A{r}", it["name"], 9)
-            ws[f"A{r}"].alignment = Alignment(indent=1, vertical="center", wrap_text=True)
+            ws[f"A{r}"].alignment = Alignment(horizontal="left", indent=1, vertical="center", wrap_text=True)
             put(ws, f"C{r}", it.get("qty", ""), 9, align="center")
             put(ws, f"D{r}", it.get("unit", ""), 9, align="center")
             put(ws, f"E{r}", None if blank else it["amount"], 9, align="right", fmt=YEN)
             put(ws, f"F{r}", it.get("note", ""), 8, wrap=True)
-            ws[f"F{r}"].alignment = Alignment(indent=1, vertical="center", wrap_text=True)
+            ws[f"F{r}"].alignment = Alignment(horizontal="left", indent=1, vertical="center", wrap_text=True)
             box(ws, f"A{r}:F{r}")
+            ws.row_dimensions[r].height = 18
             if len(it.get("note", "")) > 16 or len(it["name"]) > 22:
                 ws.row_dimensions[r].height = 26
         put(ws, f"E{sr}", f"=SUM(E{sr + 1}:E{r})", 9, True, "right", LIGHT, fmt=YEN)
@@ -119,18 +130,18 @@ def build_xlsx(data, company, sections, out, blank=False):
         r = sub_r + i
         ws.merge_cells(f"A{r}:D{r}")
         put(ws, f"A{r}", label, 11 if big else 9, True, "right", GRAY if big else None)
+        ws[f"A{r}"].alignment = Alignment(horizontal="right", vertical="center", indent=1)
         fmt = '"－"#,##0;"－"#,##0;""' if i == 2 else YEN
         put(ws, f"E{r}", formulas[r], 11 if big else 9, True, "right", GRAY if big else None, fmt=fmt)
         box(ws, f"A{r}:F{r}", GRAY if big else None)
-        if big:
-            ws.row_dimensions[r].height = 22
+        ws.row_dimensions[r].height = 22 if big else 18
     total_ref = f"E{r}"
 
     # 御見積金額 (合計と連動)
     ws.merge_cells("B6:C6")
     put(ws, "A6", "御見積金額", 9, True, "center", GRAY)
     put(ws, "B6", f"={total_ref}", 16, True, fmt='"￥"#,##0"－";;"￥"')
-    put(ws, "D6", "（消費税込）", 8)
+    put(ws, "D6", "（税込）", 8)
     box(ws, "A6:D6")
     ws.row_dimensions[6].height = 30
 
@@ -145,7 +156,7 @@ def build_xlsx(data, company, sections, out, blank=False):
     ws.page_setup.paperSize = ws.PAPERSIZE_A4
     ws.page_setup.orientation = "portrait"
     ws.page_setup.fitToWidth = 1
-    ws.page_setup.fitToHeight = 0
+    ws.page_setup.fitToHeight = 1
     ws.sheet_properties.pageSetUpPr.fitToPage = True
     ws.print_options.horizontalCentered = True
     ws.sheet_view.showGridLines = False

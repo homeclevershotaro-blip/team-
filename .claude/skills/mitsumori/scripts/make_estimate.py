@@ -144,8 +144,11 @@ def draw_page_head(p, data, first=True):
     p.line(L, H - 70, R, H - 70, 1.6)
     if not first:
         return H - 90
-    cust = f'{data["customer"]} {data.get("honorific", "様")}'
-    p.text(L + 2, H - 100, cust, 12)
+    hon = data.get("honorific", "様")
+    if data.get("customer", "").strip():
+        p.text(L + 2, H - 100, f'{data["customer"]} {hon}', 12)
+    else:
+        p.text(262, H - 100, hon, 12, align="r")
     p.line(L, H - 107, 270, H - 107, 0.6)
     p.text(R, H - 94, data["date"], 8.5, align="r")
     p.text(L, H - 124, data.get("intro", COMPANY["default_intro"]), 8.5)
