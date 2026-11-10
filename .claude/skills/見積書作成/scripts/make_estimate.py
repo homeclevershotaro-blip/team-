@@ -92,9 +92,15 @@ def build(d, co, out):
         put(f"E{row}", None, None, None, B, fill)
     tot(r, "小計", "=" + "+".join(f"D{x}" for x in sec_rows))
     tot(r+1, "消費税（10%）", f"=ROUNDDOWN(D{r}*0.1,0)")
-    tot(r+2, "端数値引き", -abs(d.get("discount", 0)))
-    tot(r+3, "合計（税込）", f"=D{r}+D{r+1}+D{r+2}", G)
-    ws["B6"] = f'="¥"&TEXT(D{r+3},"#,##0")&"－"'
+    disc = abs(d.get("discount", 0))
+    if disc:
+        tot(r+2, "端数値引き", -disc)
+        tot(r+3, "合計（税込）", f"=D{r}+D{r+1}+D{r+2}", G)
+        r += 1
+    else:
+        tot(r+2, "合計（税込）", f"=D{r}+D{r+1}", G)
+    ws["B6"] = f'="¥"&TEXT(D{r+2},"#,##0")&"－"'
+    r -= 1
     for i, t in enumerate(d.get("notes", [])):
         ws.merge_cells(f"A{r+5+i}:E{r+5+i}"); put(f"A{r+5+i}", t, f(9), L)
     ws.print_area = f"A1:E{r+5+len(d.get('notes', []))}"

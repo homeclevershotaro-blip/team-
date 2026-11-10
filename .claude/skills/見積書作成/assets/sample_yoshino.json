@@ -8,7 +8,7 @@
   "validity": "発行日より30日間",
   "sections": [
     {"name": "駐車場防水工事", "items": [
-      {"name": "駐車場防水工事　パワレックスMU工法", "qty": 1, "unit": "式", "amount": 392614, "note": "屋根なし・屋外"},
+      {"name": "駐車場防水工事　パワレックスMU工法", "qty": 1, "unit": "式", "amount": 436250, "note": "屋根なし・屋外"},
       {"name": "下地補修", "qty": 1, "unit": "式", "amount": "含む", "note": ""},
       {"name": "車止め撤去及び復旧", "qty": 1, "unit": "式", "amount": "含む", "note": ""},
       {"name": "土間目地新設", "qty": 1, "unit": "式", "amount": "含む", "note": ""}]},
