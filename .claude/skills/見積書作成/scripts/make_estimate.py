@@ -18,6 +18,15 @@ C = Alignment(horizontal="center", vertical="center", wrap_text=True)
 R = Alignment(horizontal="right", vertical="center")
 def f(sz=10, b=False): return Font(name=FN, size=sz, bold=b)
 
+def apply_markup(d):
+    """markup（例 0.25）があれば、数値の金額に上乗せする（円未満四捨五入）。"""
+    m = d.get("markup") or 0
+    if not m: return
+    for s in d["sections"]:
+        for i in s["items"]:
+            if isinstance(i["amount"], (int, float)):
+                i["amount"] = round(i["amount"] * (1 + m))
+
 def fit_target(d):
     """税込合計を target_total に合わせる（最初の数値項目で調整）。"""
     t = d.get("target_total")
@@ -32,6 +41,7 @@ def fit_target(d):
                 i["amount"] += net - cur; return
 
 def build(d, co, out):
+    apply_markup(d)
     fit_target(d)
     wb = Workbook(); ws = wb.active; ws.title = "御見積書"
     for c, w in zip("ABCDEF", [40, 7, 7, 15, 40, 2]): ws.column_dimensions[c].width = w
