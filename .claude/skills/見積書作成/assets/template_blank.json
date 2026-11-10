@@ -1,0 +1,17 @@
+{
+  "date": "令和8年○月○日",
+  "customer": "○○ ○○ 様",
+  "title": "工事名称",
+  "place": "工事場所",
+  "period": "約○日間",
+  "payment": "ご相談の上、決定いたします",
+  "validity": "発行日より30日間",
+  "sections": [
+    {"name": "工事名", "items": [
+      {"name": "項目", "qty": 1, "unit": "式", "amount": 0, "note": ""}
+    ]}
+  ],
+  "discount": 0,
+  "target_total": null,
+  "notes": ["※ 上記以外の工事は別途となります。"]
+}
